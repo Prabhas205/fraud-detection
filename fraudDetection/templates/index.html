@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Verification</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #4e73df, #1cc88a);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color:darkgreen;
+      margin-bottom: 20px;
+      font-size: 3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .result-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .result-container:hover {
+      transform: scale(1.05);
+    }
+
+    label {
+      font-size: 1.2rem;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    input[type="url"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="url"]:focus {
+      border-color: #4e73df;
+      box-shadow: 0 0 5px rgba(78, 115, 223, 0.7);
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #1cc88a;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #17a673;
+      transform: scale(1.05);
+    }
+
+    #result-display {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .safe {
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 1.2rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .unsafe {
+      color: #e74c3c;
+      font-weight: bold;
+      font-size: 1.2rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .unsafe-reason {
+      background-color: #f9d6d5;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .unsafe-reason ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .unsafe-reason li {
+      margin-bottom: 10px;
+    }
+
+    #redirect-link {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #4e73df;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    #redirect-link:hover {
+      background-color: #2e59d9;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="result-container">
+    <h1>URL Verification</h1>
+
+    <form action="/verify" method="POST">
+      <label for="url-input">Enter URL to Check:</label>
+      <input type="url" id="url-input" name="url" placeholder="Enter URL here" required>
+      <button type="submit">Check URL</button>
+    </form>
+  </div>
+
+</body>
+</html>

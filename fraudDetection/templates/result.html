@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verification Result</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-size: cover;
+      background-attachment: fixed;
+      background: url('https://th.bing.com/th/id/R.a698cc0e89d756bfb610eca472bc1166?rik=7SQ%2ff9oBQ0TWmQ&riu=http%3a%2f%2fbetanews.com%2fwp-content%2fuploads%2f2015%2f09%2fidentity-verification.jpg&ehk=3s2dHyU0jV%2fgxzf13a5spsboqTTd3lRtLHxzKtiRaes%3d&risl=&pid=ImgRaw&r=0') center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      color: #00698f;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .result-container {
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      padding: 30px;
+      background: whitesmoke;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .result-container:hover {
+      transform: scale(1.02);
+    }
+
+    .result-container p {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      color: #333;
+    }
+
+    .result-container strong {
+      color: #333;
+      font-weight: bold;
+    }
+
+    .result-container a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      font-size: 1.1em;
+      background-color: #00698f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .result-container a:hover {
+      background-color: #00537a;
+    }
+
+    .result-container input[type="url"] {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1.1em;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .result-container input[type="url"]:focus {
+      border-color: #00698f;
+    }
+
+    .result-container button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1em;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .result-container button:hover {
+      background-color: #218838;
+    }
+
+    .safe {
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .unsafe {
+      color: #e74c3c;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .unsafe-reason {
+      margin-top: 20px;
+      background-color: #f9d6d5;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .unsafe-reason ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .unsafe-reason li {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .unsafe-reason strong {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h1>Verification Result</h1>
+
+    <form id="url-form">
+      <label for="url-input">Enter URL to Check:</label>
+      <input type="url" id="url-input" name="url" placeholder="Enter URL here" required>
+      <button type="submit">Check URL</button>
+    </form>
+
+    <div id="result-display" style="display:none;">
+      <p><strong>URL:</strong> <span id="url-placeholder"></span></p>
+      <p><strong>Status:</strong> <span id="status-placeholder"></span></p>
+      <div id="unsafe-reason" class="unsafe-reason" style="display:none;">
+        <strong>Reason:</strong>
+        <ul id="reasons-list">
+          <!-- List of reasons for being unsafe will appear here -->
+        </ul>
+      </div>
+      <a id="redirect-link" href="/" style="display:none;">Go to Safe Link</a>
+      <a href="/">Check Another Link</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('url-form');
+      const resultDisplay = document.getElementById('result-display');
+      const urlInput = document.getElementById('url-input');
+      const redirectLink = document.getElementById('redirect-link');
+      const urlPlaceholder = document.getElementById('url-placeholder');
+      const statusPlaceholder = document.getElementById('status-placeholder');
+      const reasonsList = document.getElementById('reasons-list');
+      const unsafeReason = document.getElementById('unsafe-reason');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get the URL from the input field
+        const url = urlInput.value;
+        
+        // Here, replace with your actual verification logic (simulating with dummy data)
+        const result = Math.random() > 0.5 ? 'Safe' : 'Unsafe';  // Randomly choose Safe or Unsafe for demonstration
+
+        // Set the URL and status dynamically
+        urlPlaceholder.textContent = url;
+        statusPlaceholder.textContent = result;
+        statusPlaceholder.className = result.toLowerCase();
+
+        // Reset previous reasons
+        reasonsList.innerHTML = '';
+        unsafeReason.style.display = 'none';
+        redirectLink.style.display = 'none';
+
+        // Check the result and handle accordingly
+        if (result === 'Safe') {
+          // If the link is safe, show the redirect button
+          redirectLink.href = url;
+          redirectLink.style.display = 'block';
+        } else if (result === 'Unsafe') {
+          // If the link is unsafe, show the reasons
+          const reasons = [
+            "The link contains malicious content.",
+            "It redirects to a known phishing site.",
+            "The site is flagged for suspicious activity."
+          ];
+          reasons.forEach(function (reason) {
+            const listItem = document.createElement('li');
+            listItem.textContent = reason;
+            reasonsList.appendChild(listItem);
+          });
+          unsafeReason.style.display = 'block';
+        }
+
+        // Show the result section
+        resultDisplay.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
